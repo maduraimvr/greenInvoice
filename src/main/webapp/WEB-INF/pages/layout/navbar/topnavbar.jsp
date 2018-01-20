@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <!-- top navigation -->
-        <div class="top_nav">
+        <div class="top_nav footer_fixed">
           <div class="nav_menu">
             <nav>
               <div class="nav toggle">
