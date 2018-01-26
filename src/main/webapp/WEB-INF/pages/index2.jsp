@@ -54,6 +54,7 @@
 					<!-- form datetimepicker -->
 					<div class="control-group">
 						<div class="controls">
+<%--         <input type="hidden" name="userId" value="${userId}"> --%>
 							<div class="col-md-11 xdisplay_inputx form-group has-feedback">
 								<input type="text" class="form-control has-feedback-left"
 									id="single_cal1" placeholder="First Name"

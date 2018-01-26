@@ -3,11 +3,15 @@
  */
 package com.company.greeninvoice.entity;
 
+import lombok.Data;
+
 /**
  * @author Venkatraman
  *
  */
+@Data
 public class RequestEnity {
-   int step_number;
-   Product product;
+	private int step_number;
+   
+	private Product product;
 }

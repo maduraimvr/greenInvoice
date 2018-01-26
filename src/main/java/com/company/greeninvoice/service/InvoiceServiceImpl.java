@@ -5,18 +5,23 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.company.greeninvoice.dao.InvoiceDao;
+import com.company.greeninvoice.dao.UserDao;
 import com.company.greeninvoice.dto.Customer;
 import com.company.greeninvoice.dto.Invoice;
+import com.company.greeninvoice.dto.User;
 import com.company.greeninvoice.entity.ItemDetail;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * InvoiceServiceImpl class handles all methods for invoice.
+ * 
+ * @author Venkatraman
+ *
+ */
 @Service
 public class InvoiceServiceImpl implements InvoiceService{
 
@@ -33,47 +38,30 @@ public class InvoiceServiceImpl implements InvoiceService{
 	@Autowired
 	InvoiceDao invoiceDao;
 	
-//	public void setInvoiceDao(InvoiceDao invoiceDao){
-//	     this.invoiceDao = invoiceDao;
-//	  }
-	
+	@Autowired
+	UserDao userDao;
+
 	@Transactional
 	@Override
 	public String generateInvoiceNumber() {
-		insertRecord();
-		String invoiceNumber = EMPTY_STRING;
-//		List<Invoice> invoiceList=invoiceDao.getAll();
-//		List<Invoice> invoiceList=new ArrayList<>();
-//		if(Objects.nonNull(invoiceList)) {
-//			int totalInvoiceNumber = invoiceList.size();
-//			if(totalInvoiceNumber==0) {
-//				LocalDate todayDate=LocalDate.now();
-//				String yearCode = String.valueOf(todayDate.getYear()%1000);
-//				String monthCode = LocalDate.now().getMonth().name().substring(0, 3);
-//				invoiceNumber=INVOICE_CODE+SEPERATOR+yearCode+monthCode+SEPERATOR+DEFAULT_INVOICE_NUMBER;
-//			}else {
-//				if(StringUtils.isEmpty(invoiceNumber)) {
-//					LocalDate todayDate=LocalDate.now();
-//					String[] invoiceCodeArray = invoiceNumber.split(SEPERATOR);
-//					int lastInvoiceNumber=Integer.parseInt(invoiceCodeArray[2]);
-//					String number = String.format(INVOICE_FORMATTER, lastInvoiceNumber+1);
-//					String yearCode = String.valueOf(todayDate.getYear()%1000);
-//					String monthCode = LocalDate.now().getMonth().name().substring(0, 3);
-//					invoiceNumber=INVOICE_CODE+SEPERATOR+yearCode+monthCode+SEPERATOR+number;
-//				}
-//			}
-//		}
-		return invoiceNumber;
+		Invoice invoice=new Invoice();
+//		inserTesttUser();
+		return "";
 	}
 
-	private void insertRecord() {
+	/**
+	 * For testing (DO NOT USE)
+	 */
+	private void insertTestInvoice() {
 		Invoice invoice=new Invoice();
 		List<ItemDetail> itemdetailsList=new ArrayList<>();
 		ItemDetail itemDetail=new ItemDetail();
+		ItemDetail itemDetail2=new ItemDetail();
+		ItemDetail itemDetail3=new ItemDetail();
 		LocalDate todayDate=LocalDate.now();
 		String yearCode = String.valueOf(todayDate.getYear()%1000);
 		String monthCode = LocalDate.now().getMonth().name().substring(0, 3);
-		String invoiceNumber=INVOICE_CODE+SEPERATOR+yearCode+monthCode+SEPERATOR+"0001";
+		String invoiceNumber=INVOICE_CODE+SEPERATOR+yearCode+monthCode+SEPERATOR+"0002";
 		invoice.setInvoiceNumber(invoiceNumber);
 		Customer customer=new Customer();
 		customer.setCustomerName("VENKAT");
@@ -81,34 +69,34 @@ public class InvoiceServiceImpl implements InvoiceService{
 		invoice.setCustomerDetails(customer);
 		invoice.setTotalAmount((float) 25.02);
 		invoice.setInvoiceDate(Date.valueOf(todayDate));
-		itemDetail.setSerialNumber("2");
-		itemDetail.setItemDescription("Pencil");
+		itemDetail.setSerialNumber("200");
+		itemDetail.setItemDescription("sun");
 		itemDetail.setItemQuantity(2);
 		itemDetail.setItemRate(25);
 		itemDetail.setAmount(50);
 		itemdetailsList.add(itemDetail);
+		itemDetail2.setSerialNumber("100");
+		itemDetail2.setItemDescription("moon");
+		itemDetail2.setItemQuantity(9);
+		itemDetail2.setItemRate(255);
+		itemDetail2.setAmount(100);
+		itemdetailsList.add(itemDetail2);
 		invoice.setItemdetailsList( itemdetailsList);
-//		JSONObject responseDetailsJson = new JSONObject();
-//		JSONArray jsonArray = new JSONArray();
-//		invoice.getItemdetailsList().stream().forEach(action->{
-//			JSONObject formDetailsJson = new JSONObject();
-//			 formDetailsJson.put("serialNumber", action.getSerialNumber());
-//			 formDetailsJson.put("itemDescription", action.getItemDescription());
-//			 formDetailsJson.put("itemQuantity", action.getItemQuantity());
-//			 formDetailsJson.put("itemRate", action.getItemRate());
-//			 formDetailsJson.put("amount", action.getAmount());
-//			 jsonArray.put(responseDetailsJson);
-//		});
-//		responseDetailsJson.put("itemDetails", jsonArray);
-		System.out.println("--------------------------------------------------------------------------------");
-//		System.out.println(responseDetailsJson);
-		System.out.println("--------------------------------------------------------------------------------");
-		ObjectMapper obj=new ObjectMapper();
-//		invoice.setItemDetailListJSON(responseDetailsJson.toString());
-		
-//		objectmapper.
-//		invoiceDao.addInvoice(invoice);
-		invoiceDao.save(invoice);
+		Invoice invoice2= invoiceDao.saveAndFlush(invoice);
+	}
+
+	/**
+	 * For testing (DO NOT USE)
+	 */
+	private void inserTesttUser() {
+		User user=new User();
+		user.setUserName("admin");
+		user.setFirstName("Venkatraman");
+		user.setLastName("Muthukrishnan");
+		user.setPassword("admin");
+		user.setEmail("admin@greeninvoice.com");
+		user.setProfileImage("admin.png");
+		userDao.save(user);
 	}
 
 }

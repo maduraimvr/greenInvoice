@@ -2,6 +2,12 @@ package com.company.greeninvoice.service;
 
 import org.springframework.stereotype.Service;
 
+/**
+ * InvoiceService interface handles all methods for invoice.
+ * 
+ * @author Venkatraman
+ *
+ */
 @Service
 public interface InvoiceService {
 

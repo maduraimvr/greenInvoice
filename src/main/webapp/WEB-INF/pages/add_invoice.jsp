@@ -55,6 +55,7 @@
 
         <!-- page content -->
         <div class="right_col" role="main">
+        <input type="hidden" name="userId" value="${userId}">
           <div class="">
             <div class="page-title">
               <div class="title_left">
@@ -86,7 +87,7 @@
                     <div class="row" id="invoice-number-row">
   					<div class="col-md-4 col-xs-12 col-sm-4 col-lg-4">
   						<label>Invoice Number</label>
-                        <input id="invoice_number_text_input"type="text" class="form-control"  readonly="readonly" data-inputmask="'mask' : 'INV-****-****'">
+                        <input id="invoice_number_text_input"type="text" class="form-control" value="${invoiceNumber}" readonly="readonly" >
 					</div>
   						<div class="col-md-4 col-md-offset-4 col-xs-12 col-sm-4 col-sm-offset-4 col-lg-4 col-lg-offset-4"><label>Invoice Date</label>
                       	<div class="control-group">

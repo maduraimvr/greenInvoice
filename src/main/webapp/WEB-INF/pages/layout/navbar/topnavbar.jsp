@@ -19,7 +19,7 @@
                             <c:otherwise>
                                 <img src='${pageContext.request.contextPath}/resources/images/profile-pictures/img_avatar1.png' class="img-circle" alt="User Image">
                             </c:otherwise>
-                  </c:choose>${user.name}
+                  </c:choose>${user.firstName}
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -55,7 +55,7 @@
 <!--                         <img src="images/img_avatar1.png" alt="Profile Image" /> -->
                         </span>
                         <span>
-                          <span>${user.name}</span>
+                          <span>${user.firstName}</span>
                           <span class="time">3 mins ago</span>
                         </span>
                         <span class="message">
@@ -77,7 +77,7 @@
 <!--                         <img src="images/img_avatar1.png" alt="Profile Image -->
                         </span>
                         <span>
-                          <span>${user.name}</span>
+                          <span>${user.firstName}</span>
                           <span class="time">3 mins ago</span>
                         </span>
                         <span class="message">
